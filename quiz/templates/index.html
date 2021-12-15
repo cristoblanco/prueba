@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<style>
+    .uno {
+        color: blueviolet;
+        background-color: pink;
+        font-size: 20mm;
+        text-align: center;
+    }
+    .boton_respuesta {
+        color: blueviolet;
+        background-color: white;
+        width: 100px;
+        height: 50px;
+        font-size: 100 px;
+    }
+
+    .label {
+        font-family: 'Lucida Sans',
+         'Lucida Sans Regular',
+         'Lucida Grande',
+         'Lucida Sans Unicode',
+         Geneva,
+         Verdana,
+         sans-serif;
+    }
+</style>
+<title>Ejercicio 3</title>
+<!-- <h1> <form> <input> <button></button>  -->
+
+
+
+<body>
+    <form action="check_response" method="post">
+    {% csrf_token %}
+        <div class='uno'">Preguntas</div>
+        {% for q in questions %}
+            <h1>{{ forloop.counter }} ) Pregunta</h1>
+            <label class="label">
+                 {{ q.description }}
+            </label>
+
+            <ol>
+                {% for r in reponses %}
+                    {% if r.question.id == q.id %}
+                        <li>
+                            <input type="radio" name="pregunta_{{ q.id }}" value="{{ r.id }}">
+                            {{ r.description }}
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ol>
+
+
+        {% endfor %}
+        <button>
+            enviar
+        </button>
+
+    </form>
+</body>
+<script>
+    document.getElementById("myBtn").addEventListener("click", miFuncErr);
+    document.getElementById("myBtn2").addEventListener("click", miFunc);
+
+    document.getElementById("myBtn3").addEventListener("click", miFuncErr);
+    document.getElementById("myBtn4").addEventListener("click", miFunc);
+
+    function miFunc() {
+      alert('Respuesta correcta');
+    }
+    function miFuncErr() {
+      alert('Respuesta Incorrecta');
+    }
+
+
+  </script>
+
+
+</html>
